@@ -1,0 +1,19 @@
+{
+  "name": "Flappy Glitch backend",
+  "version": "1.0.0",
+  "description": "Single page app for playing with play canvas and doing a scoreboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "simple"
+  ],
+  "author": "Pam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^5.0.0",
+    "path": "^0.12.7"
+  }
+}

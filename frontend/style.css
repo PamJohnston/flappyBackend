@@ -1,0 +1,23 @@
+body {
+    background-color: rgba(184, 0, 240, 0.3);
+  }
+  
+  h1 {
+    color: white;
+    margin-left: 20px;
+  }
+
+  p {
+    color: white;
+  }
+
+  table, th, td {
+    border: 1px solid;
+    color: white;
+  }
+
+  button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+  }

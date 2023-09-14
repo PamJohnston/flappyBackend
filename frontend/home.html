@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<h1>This is Flappy Glitch</h1>
+<p>Play the game.</p>
+
+    <iframe loading="lazy" src="https://playcanv.as/b/2c72d0fd" width="640" height="480"></iframe>
+
+    <div>
+        <label for="yourname">Name:</label>
+        <input type="text" id="yourname" name="yourname">
+        <p id="currentScore"> </p>
+        <br>
+        <button type="submit" class="button1" id="submitScore" onclick="uploadScore()">Upload Score</button>
+
+    </div>
+
+    <div>
+        <table>
+        <thead>
+            <tr>
+            <th>Score</th>
+            <th>Name</th>
+            <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody id="scoresGoHere">
+        </tbody>
+        </table>
+    </div>
+
+
+
+    <script>
+        var data = {
+            "data": [{"_id":"0","name":"Pam","score":0,"comment":"Just a placeholder"},
+                        {"_id":"0","name":"Glipper","score":2,"comment":"No comment"},
+                        {"_id":"0","name":"Glipper","score":1,"comment":null}]
+        }
+
+        let url = 'http://localhost:8000/api/score'
+    
+        
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            // Typical action to be performed when the document is ready:
+            data = xhttp.responseText;
+            console.log("Got the data from the API")
+            data = JSON.parse(data)
+            console.log(data)
+            let body = ""
+            for (var i = 0; i < data.length; i++) {
+                var comment = data[i].comment;
+                console.log(comment)
+                if (comment == null){
+                    comment = ""
+                }
+                body += `<tr><td>${data[i].score}</td><td>${data[i].name}</td><td>${comment}</td></tr>`
+            }
+            var scoreTable = document.getElementById('scoresGoHere');
+            console.log(scoreTable)
+            scoreTable.innerHTML = body
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+
+        window.onmessage = function(e) {
+            console.log("***************************** A message!")
+            console.log(e.data)
+            localStorage.setItem('Flappy Bird Best Score', e.data);
+            var curScore = document.getElementById('currentScore');
+            curScore.innerHTML = `Current score: ${e.data}`
+            //if (e.data == 'hello') {
+            //    alert('It works!');
+            //}
+        };
+
+
+        function uploadScore() {
+            console.log("Uploading score")
+            let x = localStorage.getItem('Flappy Bird Best Score');
+            //console.log("Here's x: " + ${x})
+            let n = document.getElementById("yourname").value;
+            console.log(n)
+            let scoreurl = `http://127.0.0.1:8000/api/score?name=${n}\&score=${x}`
+            console.log(scoreurl)
+            var myhttp = new XMLHttpRequest();
+            myhttp.open("POST", scoreurl, true);
+            myhttp.send();
+
+        }
+
+        </script>
+        
+
+</body>
+</html>
