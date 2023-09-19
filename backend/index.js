@@ -23,7 +23,7 @@ app.get('/api', function(req, res){
     res.send("Yes we have an API now")
 });
 
-app.use("/api/todolist", function(req, res, next) {
+app.use("/api/score", function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
