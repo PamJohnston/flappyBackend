@@ -24,9 +24,15 @@ app.get('/api', function(req, res){
 });
 
 app.use("/api/score", function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000"); // update to match the domain you will make the request from
+    const origin = req.headers.origin;
+    console.log("The origin: "+origin)
+    if (origin != undefined) {
+    	res.header("Access-Control-Allow-Origin", origin); // update to match the domain you will make the request from
+    	res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+    }
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    res.header("Access-Control-Allow-Credentials", true)
     next();
   });
   
