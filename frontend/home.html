@@ -43,7 +43,8 @@
                         {"_id":"0","name":"Glipper","score":1,"comment":null}]
         }
 
-        let url = 'http://localhost:8000/api/score'
+        //let url = 'http://localhost:8000/api/score'
+        let url = 'http://soc-flappy.rgu.ac.uk:8080/api/score'
     
         
         var xhttp = new XMLHttpRequest();
@@ -89,7 +90,7 @@
             //console.log("Here's x: " + ${x})
             let n = document.getElementById("yourname").value;
             console.log(n)
-            let scoreurl = `http://127.0.0.1:8000/api/score?name=${n}\&score=${x}`
+            let scoreurl = `http://soc-flappy.rgu.ac.uk:8080/api/score?name=${n}\&score=${x}`
             console.log(scoreurl)
             var myhttp = new XMLHttpRequest();
             myhttp.open("POST", scoreurl, true);
